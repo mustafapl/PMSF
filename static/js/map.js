@@ -2230,7 +2230,7 @@ function customizePokemonMarker(marker, item, skipNotification) {
         marker.rangeCircle = addRangeCircle(marker, map, 'pokemon')
     }
 
-    marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    marker.bindPopup(pokemonLabel(item), {autoPan: false})
 
     if (notifiedPokemon.indexOf(item['pokemon_id']) > -1 || notifiedRarity.indexOf(item['pokemon_rarity']) > -1) {
         if (!skipNotification) {
@@ -2365,9 +2365,9 @@ function getGymMarkerIcon(item) {
             inBattle +
             '</div>'
         fortMarker = L.divIcon({
-            iconSize: [50, 50],
-            iconAnchor: [17, 30],
-            popupAnchor: [0, -35],
+            iconSize: 32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -16],
             className: 'egg-marker',
             html: html
         })
@@ -2447,7 +2447,7 @@ function setupGymMarker(item) {
         }
         sendNotification(title, text, icon, item['latitude'], item['longitude'])
     }
-    marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    marker.bindPopup(gymLabel(item), {autoPan: false})
     addListeners(marker)
     return marker
 }
@@ -2539,9 +2539,9 @@ function getPokestopMarkerIcon(item) {
                 html += '<div><span class="raid-countdown gym-icon-countdown" disappears-at="' + item['incident_expiration'] + '"> </span></div>'
             }
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-rocket-marker',
                 html: html
             })
@@ -2555,9 +2555,9 @@ function getPokestopMarkerIcon(item) {
                     '<img src="' + iconpath + 'rewards/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
-                    iconAnchor: [25, 45],
-                    popupAnchor: [0, -35],
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -16],
                     className: 'stop-quest-marker',
                     html: html
                 })
@@ -2582,9 +2582,9 @@ function getPokestopMarkerIcon(item) {
                     '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
-                    iconAnchor: [25, 45],
-                    popupAnchor: [0, -35],
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -16],
                     className: 'stop-quest-marker',
                     html: html
                 })
@@ -2594,9 +2594,9 @@ function getPokestopMarkerIcon(item) {
                     '<img src="' + iconpath + 'rewards/reward_stardust_' + item['quest_dust_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
-                    iconAnchor: [25, 45],
-                    popupAnchor: [0, -35],
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -16],
                     className: 'stop-quest-marker',
                     html: html
                 })
@@ -2606,9 +2606,9 @@ function getPokestopMarkerIcon(item) {
                     '<img src="' + iconpath + 'rewards/reward_' + item['quest_item_id'] + '_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
-                    iconAnchor: [25, 45],
-                    popupAnchor: [0, -35],
+                    iconSize: [32,32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -16],
                     className: 'stop-quest-marker',
                     html: html
                 })
@@ -2616,17 +2616,17 @@ function getPokestopMarkerIcon(item) {
         } else if (!noLures && item['lure_expiration'] > Date.now()) {
             html = '<div><img src="static/forts/PstopLured_' + item['lure_id'] + '.png" style="width:50px;height:72;top:-35px;right:10px;"/><div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32,32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-lured-marker',
                 html: html
             })
         } else {
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32,32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-marker',
                 html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:72;top:-35px;right:10px;"/></div>'
             })
@@ -2645,9 +2645,9 @@ function getPokestopMarkerIcon(item) {
             html += '<div><span class="raid-countdown gym-icon-countdown" disappears-at="' + item['incident_expiration'] + '"> </span></div>'
         }
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
-            iconAnchor: [25, 45],
-            popupAnchor: [0, -35],
+            iconSize: [32,32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -16],
             className: 'stop-rocket-marker',
             html: html
         })
@@ -2661,9 +2661,9 @@ function getPokestopMarkerIcon(item) {
                 '<img src="' + iconpath + 'rewards/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-quest-marker',
                 html: html
             })
@@ -2688,9 +2688,9 @@ function getPokestopMarkerIcon(item) {
                 '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32,32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-quest-marker',
                 html: html
             })
@@ -2700,9 +2700,9 @@ function getPokestopMarkerIcon(item) {
                 '<img src="' + iconpath + 'rewards/reward_stardust_' + item['quest_dust_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-quest-marker',
                 html: html
             })
@@ -2712,9 +2712,9 @@ function getPokestopMarkerIcon(item) {
                 '<img src="' + iconpath + 'rewards/reward_' + item['quest_item_id'] + '_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
-                iconAnchor: [25, 45],
-                popupAnchor: [0, -35],
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -16],
                 className: 'stop-quest-marker',
                 html: html
             })
@@ -2722,17 +2722,17 @@ function getPokestopMarkerIcon(item) {
     } else if (Store.get(['showLures']) && !noLures && item['lure_expiration'] > Date.now()) {
         html = '<div><img src="static/forts/PstopLured_' + item['lure_id'] + '.png" style="width:50px;height:72;top:-35px;right:10px;"/><div>'
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
-            iconAnchor: [25, 45],
-            popupAnchor: [0, -35],
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -16],
             className: 'stop-lured-marker',
             html: html
         })
     } else {
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
-            iconAnchor: [25, 45],
-            popupAnchor: [0, -35],
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -16],
             className: 'stop-marker',
             html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:72;top:-35px;right:10px;"/></div>'
         })
@@ -2743,9 +2743,9 @@ function setupPokestopMarker(item) {
     var pokestopMarkerIcon = getPokestopMarkerIcon(item)
     var marker
     if (item['quest_pokemon_shiny'] === 'true') {
-        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: false, autoClose: false})
+        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false})
     } else {
-        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: false, autoClose: false})
+        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false})
     }
     markers.addLayer(marker)
 
@@ -2772,8 +2772,8 @@ function setupNestMarker(item) {
     }
     var nestMarkerIcon = L.divIcon({
         iconSize: [36, 48],
-        iconAnchor: [20, 45],
-        popupAnchor: [0, -45],
+        iconAnchor: [18, 48],
+        popupAnchor: [0, -18],
         className: 'marker-nests',
         html: getNestMarkerIcon
     })
@@ -2784,7 +2784,7 @@ function setupNestMarker(item) {
         })
         nestLayerGroup.addLayer(polygon)
     }
-    var marker = L.marker([item['lat'], item['lon']], {icon: nestMarkerIcon, zIndexOffset: 1020, virtal: true}).bindPopup(nestLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.marker([item['lat'], item['lon']], {icon: nestMarkerIcon, zIndexOffset: 1020, virtal: true}).bindPopup(nestLabel(item), {autoPan: false})
     markers.addLayer(marker)
     addListeners(marker)
 
@@ -2868,7 +2868,7 @@ function setupCommunityMarker(item) {
         html: '<img src="static/images/marker-' + item.type + '.png" style="width:36px;height: auto;"/>'
     })
 
-    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -2964,7 +2964,7 @@ function setupPortalMarker(item) {
             pane: 'portals'
         }
     }
-    var marker = L.circle([item['lat'], item['lon']], circle).bindPopup(portalLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.circle([item['lat'], item['lon']], circle).bindPopup(portalLabel(item), {autoPan: false})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -2993,7 +2993,7 @@ function setupPoiMarker(item) {
         className: 'marker-poi',
         html: html
     })
-    var marker = L.marker([item['lat'], item['lon']], {icon: poiMarkerIcon, zIndexOffset: 1020}).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, virtual: true})
+    var marker = L.marker([item['lat'], item['lon']], {icon: poiMarkerIcon, zIndexOffset: 1020}).bindPopup(poiLabel(item), {autoPan: false, virtual: true})
     markers.addLayer(marker)
     addListeners(marker)
 
@@ -3152,7 +3152,7 @@ function setupSpawnpointMarker(item) {
         fillColor: color,
         fillOpacity: 0.4
     }
-    var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false, closeOnclick: false, autoClose: false})
+    var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false})
     markersnotify.addLayer(circle)
     addListeners(circle)
 
@@ -3174,7 +3174,7 @@ function setupScanLocationMarker(item) {
         html: html
     })
 
-    var marker = L.marker([item['latitude'], item['longitude']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(liveScanLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.marker([item['latitude'], item['longitude']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(liveScanLabel(item), {autoPan: false})
     liveScanGroup.addLayer(marker)
 
     addListeners(marker)
