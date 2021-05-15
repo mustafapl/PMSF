@@ -816,7 +816,7 @@ function showS2Cells(level, style) {
         if (cell.level === 14 && Store.get('showPokestops') && Store.get('showGyms') && !$('.submit-on-off-button').hasClass('on')) {
             poly.bindPopup(cellLabel(stopCount, sponsoredStopCount, sponsoredGymCount, gymCount, totalCount, possibleCandidatePoiCount, submittedPoiCount, declinedPoiCount, resubmittedPoiCount, notEligiblePoiCount, totalPoiCount), {
                 autoPan: false,
-                closeOnClick: false,
+                closeOnClick: true,
                 autoClose: false
             })
         }
@@ -1423,7 +1423,7 @@ function gymLabel(item) {
         var costumeStr = (item['raid_pokemon_costume'] > 0) ? '_' + item['raid_pokemon_costume'] : ''
         var evolutionStr = (evolution > 0) ? '_' + evolution : ''
         if (raidStarted) {
-            raidIcon = '<img style="width: 70px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeStr + evolutionStr + '.png"/>'
+            raidIcon = '<img style="width: 48px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeStr + evolutionStr + '.png"/>'
         } else if (item.raid_start <= Date.now()) {
             var hatchedEgg = ''
             if (item['raid_level'] <= 2) {
@@ -1435,7 +1435,7 @@ function gymLabel(item) {
             } else {
                 hatchedEgg = 'hatched_mega'
             }
-            raidIcon = '<img src="static/raids/egg_' + hatchedEgg + '.png" style="height:70px;">'
+            raidIcon = '<img src="static/raids/egg_' + hatchedEgg + '.png" style="height:48px;">'
         } else {
             var raidEgg = ''
             if (item['raid_level'] <= 2) {
@@ -1447,7 +1447,7 @@ function gymLabel(item) {
             } else {
                 raidEgg = 'mega'
             }
-            raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png" style="height:70px;">'
+            raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png" style="height:48px;">'
         }
     }
     if (!noRaids && manualRaids && item['scanArea'] === false) {
@@ -1535,9 +1535,9 @@ function getReward(item) {
     if (!noTeamRocket && item['incident_expiration'] > Date.now()) {
         styleStr = 'position:absolute;height:50px;top:60px;'
     } else if (item['quest_reward_type'] === 2) {
-        styleStr = 'position:absolute;height:35px;right:55%;top:85px;filter:drop-shadow(1px 0 0 black)drop-shadow(-1px 0 0 black);'
+        styleStr = 'position:absolute;height:32px;right:55%;top:85px;filter:drop-shadow(1px 0 0 black)drop-shadow(-1px 0 0 black);'
     } else {
-        styleStr = 'position:absolute;height:35px;right:55%;top:85px;'
+        styleStr = 'position:absolute;height:32px;right:55%;top:85px;'
     }
     if (item['quest_reward_type'] === 12) {
         rewardImage = '<img style="' + styleStr + '" src="' + iconpath + 'rewards/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png"/>'
@@ -1748,7 +1748,7 @@ function pokestopLabel(item) {
         stopName = '<b class="pokestop-rocket-name">' + item['pokestop_name'] + '</b>'
         if (item['url'] !== null) {
             stopImage = '<img class="pokestop-rocket-image" id="' + item['pokestop_id'] + '" src="' + item['url'] + '" onclick="openFullscreenModal(document.getElementById(\'' + item['pokestop_id'] + '\').src)"/>' +
-            '<img src="static/forts/teamRocket.png" style="position:absolute;height:30px;left:55%;">' +
+            '<img src="static/forts/teamRocket.png" style="position:absolute;height:32px;left:55%;">' +
             '<img src="static/grunttype/' + item['grunt_type'] + '.png" style="position:absolute;height:35px;right:55%;top:85px;">'
         }
     } else if (!noQuests && item['quest_type'] !== 0 && lastMidnight < Number(item['quest_timestamp'])) {
@@ -1816,7 +1816,7 @@ function pokestopLabel(item) {
         str += '<div>' + i8ln('Error: Undefined Quest Type') + ': ' + item['quest_type'] + '</div>'
     }
     if (!noLures && item['lure_expiration'] > Date.now()) {
-        var lureType = '<img style="padding:5px;position:relative;left:0px;top:12px;height:40px;" src="static/forts/LureModule_' + item['lure_id'] + '.png"/>'
+        var lureType = '<img style="padding:5px;position:relative;left:0px;top:12px;height:32px;" src="static/forts/LureModule_' + item['lure_id'] + '.png"/>'
         if (item['lure_id'] === 501) {
             lureType += i8ln('Normal')
         } else if (item['lure_id'] === 502) {
@@ -2111,7 +2111,7 @@ function customizePokemonMarker(marker, item, skipNotification) {
         marker.rangeCircle = addRangeCircle(marker, map, 'pokemon')
     }
 
-    marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
 
     if (notifiedPokemon.indexOf(item['pokemon_id']) > -1 || notifiedRarity.indexOf(item['pokemon_rarity']) > -1) {
         if (!skipNotification) {
@@ -2328,7 +2328,7 @@ function setupGymMarker(item) {
         }
         sendNotification(title, text, icon, item['latitude'], item['longitude'])
     }
-    marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
     addListeners(marker)
     return marker
 }
@@ -2399,11 +2399,11 @@ function getPokestopMarkerIcon(item) {
     var shinyStr = ''
     if (Store.get(['showPokestops']) && !Store.get(['showQuests']) && !Store.get(['showLures']) && !Store.get(['showRocket']) && !Store.get(['showAllPokestops'])) {
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
+            iconSize: [32, 32],
             iconAnchor: [25, 45],
             popupAnchor: [0, -35],
             className: 'stop-marker',
-            html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:72;top:-35px;right:10px;"/></div>'
+            html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:32;top:-35px;right:10px;"/></div>'
         })
     } else if (Store.get(['showAllPokestops']) && !noAllPokestops) {
         if (!noTeamRocket && item['incident_expiration'] > Date.now()) {
@@ -2420,7 +2420,7 @@ function getPokestopMarkerIcon(item) {
                 html += '<div><span class="raid-countdown gym-icon-countdown" disappears-at="' + item['incident_expiration'] + '"> </span></div>'
             }
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-rocket-marker',
@@ -2432,11 +2432,11 @@ function getPokestopMarkerIcon(item) {
             }
             if (item['quest_reward_type'] === 12) {
                 html = '<div style="position:relative;">' +
-                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                     '<img src="' + iconpath + 'rewards/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
+                    iconSize: [32, 32],
                     iconAnchor: [25, 45],
                     popupAnchor: [0, -35],
                     className: 'stop-quest-marker',
@@ -2459,11 +2459,11 @@ function getPokestopMarkerIcon(item) {
                     shinyStr = '_shiny'
                 }
                 html = '<div style="position:relative;">' +
-                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                     '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
+                    iconSize: [32, 32],
                     iconAnchor: [25, 45],
                     popupAnchor: [0, -35],
                     className: 'stop-quest-marker',
@@ -2471,11 +2471,11 @@ function getPokestopMarkerIcon(item) {
                 })
             } else if (item['quest_reward_type'] === 3) {
                 html = '<div style="position:relative;">' +
-                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                     '<img src="' + iconpath + 'rewards/reward_stardust_' + item['quest_dust_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
+                    iconSize: [32, 32],
                     iconAnchor: [25, 45],
                     popupAnchor: [0, -35],
                     className: 'stop-quest-marker',
@@ -2483,11 +2483,11 @@ function getPokestopMarkerIcon(item) {
                 })
             } else if (item['quest_reward_type'] === 2) {
                 html = '<div style="position:relative;">' +
-                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                    '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                     '<img src="' + iconpath + 'rewards/reward_' + item['quest_item_id'] + '_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                     '</div>'
                 stopMarker = L.divIcon({
-                    iconSize: [31, 31],
+                    iconSize: [32, 32],
                     iconAnchor: [25, 45],
                     popupAnchor: [0, -35],
                     className: 'stop-quest-marker',
@@ -2495,9 +2495,9 @@ function getPokestopMarkerIcon(item) {
                 })
             }
         } else if (!noLures && item['lure_expiration'] > Date.now()) {
-            html = '<div><img src="static/forts/PstopLured_' + item['lure_id'] + '.png" style="width:50px;height:72;top:-35px;right:10px;"/><div>'
+            html = '<div><img src="static/forts/PstopLured_' + item['lure_id'] + '.png" style="width:50px;height:32;top:-35px;right:10px;"/><div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-lured-marker',
@@ -2505,18 +2505,18 @@ function getPokestopMarkerIcon(item) {
             })
         } else {
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-marker',
-                html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:72;top:-35px;right:10px;"/></div>'
+                html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:32;top:-35px;right:10px;"/></div>'
             })
         }
     } else if (Store.get(['showRocket']) && !noTeamRocket && item['incident_expiration'] > Date.now()) {
         if (!noLures && item['lure_expiration'] > Date.now()) {
             lureStr = 'Lured_' + item['lure_id']
         }
-        html = '<div style="position:relative;"><img src="static/forts/Pstop' + lureStr + '_rocket.png" style="width:50px;height:72;top:-35px;right:10px;"/>'
+        html = '<div style="position:relative;"><img src="static/forts/Pstop' + lureStr + '_rocket.png" style="width:50px;height:32;top:-35px;right:10px;"/>'
         if (item['grunt_type'] > 0) {
             html += '<img src="static/grunttype/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/></div>'
         } else {
@@ -2526,7 +2526,7 @@ function getPokestopMarkerIcon(item) {
             html += '<div><span class="raid-countdown gym-icon-countdown" disappears-at="' + item['incident_expiration'] + '"> </span></div>'
         }
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
+            iconSize: [32, 32],
             iconAnchor: [25, 45],
             popupAnchor: [0, -35],
             className: 'stop-rocket-marker',
@@ -2538,11 +2538,11 @@ function getPokestopMarkerIcon(item) {
         }
         if (item['quest_reward_type'] === 12) {
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                 '<img src="' + iconpath + 'rewards/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-quest-marker',
@@ -2565,11 +2565,11 @@ function getPokestopMarkerIcon(item) {
                 shinyStr = '_shiny'
             }
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                 '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-quest-marker',
@@ -2577,11 +2577,11 @@ function getPokestopMarkerIcon(item) {
             })
         } else if (item['quest_reward_type'] === 3) {
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                 '<img src="' + iconpath + 'rewards/reward_stardust_' + item['quest_dust_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-quest-marker',
@@ -2589,11 +2589,11 @@ function getPokestopMarkerIcon(item) {
             })
         } else if (item['quest_reward_type'] === 2) {
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                '<img src="static/forts/' + stopQuestIcon + '" style="width:50px;height:32;top:-35px;right:10px;"/>' +
                 '<img src="' + iconpath + 'rewards/reward_' + item['quest_item_id'] + '_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
             stopMarker = L.divIcon({
-                iconSize: [31, 31],
+                iconSize: [32, 32],
                 iconAnchor: [25, 45],
                 popupAnchor: [0, -35],
                 className: 'stop-quest-marker',
@@ -2601,9 +2601,9 @@ function getPokestopMarkerIcon(item) {
             })
         }
     } else if (Store.get(['showLures']) && !noLures && item['lure_expiration'] > Date.now()) {
-        html = '<div><img src="static/forts/PstopLured_' + item['lure_id'] + '.png" style="width:50px;height:72;top:-35px;right:10px;"/><div>'
+        html = '<div><img src="static/forts/PstopLured_' + item['lure_id'] + '.png" style="width:50px;height:32;top:-35px;right:10px;"/><div>'
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
+            iconSize: [32, 32],
             iconAnchor: [25, 45],
             popupAnchor: [0, -35],
             className: 'stop-lured-marker',
@@ -2611,11 +2611,11 @@ function getPokestopMarkerIcon(item) {
         })
     } else {
         stopMarker = L.divIcon({
-            iconSize: [31, 31],
+            iconSize: [32, 32],
             iconAnchor: [25, 45],
             popupAnchor: [0, -35],
             className: 'stop-marker',
-            html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:72;top:-35px;right:10px;"/></div>'
+            html: '<div><img src="static/forts/Pstop.png" style="width:50px;height:32;top:-35px;right:10px;"/></div>'
         })
     }
     return stopMarker
@@ -2624,9 +2624,9 @@ function setupPokestopMarker(item) {
     var pokestopMarkerIcon = getPokestopMarkerIcon(item)
     var marker
     if (item['quest_pokemon_shiny'] === 'true') {
-        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: false, autoClose: false})
+        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: true, autoClose: false})
     } else {
-        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: false, autoClose: false})
+        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: true, autoClose: false})
     }
     markers.addLayer(marker)
 
@@ -2749,7 +2749,7 @@ function setupCommunityMarker(item) {
         html: '<img src="static/images/marker-' + item.type + '.png" style="width:36px;height: auto;"/>'
     })
 
-    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -2841,7 +2841,7 @@ function setupPortalMarker(item) {
             pane: 'portals'
         }
     }
-    var marker = L.circle([item['lat'], item['lon']], circle).bindPopup(portalLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.circle([item['lat'], item['lon']], circle).bindPopup(portalLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -2870,7 +2870,7 @@ function setupPoiMarker(item) {
         className: 'marker-poi',
         html: html
     })
-    var marker = L.marker([item['lat'], item['lon']], {icon: poiMarkerIcon, zIndexOffset: 1020}).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, virtual: true})
+    var marker = L.marker([item['lat'], item['lon']], {icon: poiMarkerIcon, zIndexOffset: 1020}).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: true, autoClose: false, virtual: true})
     markers.addLayer(marker)
     addListeners(marker)
 
@@ -3033,7 +3033,7 @@ function setupSpawnpointMarker(item) {
         fillColor: color,
         fillOpacity: 0.4
     }
-    var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false, closeOnclick: false, autoClose: false})
+    var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false, closeOnclick: true, autoClose: false})
     markersnotify.addLayer(circle)
     addListeners(circle)
 
